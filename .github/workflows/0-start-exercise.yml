@@ -1,0 +1,64 @@
+name: Step 0 - Start pre-work
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+  actions: write
+  issues: write
+
+env:
+  EXERCISE_TOOLKIT_REF: v0.9.3
+
+jobs:
+  start_exercise:
+    name: Start pre-work
+    if: ${{ !github.event.repository.is_template }}
+    uses: impacta-ghcp-eng-moderna/exercise-toolkit/.github/workflows/start-exercise.yml@main
+    with:
+      exercise-title: "Pre-work -- preparando o ambiente do curso"
+      intro-message: "Bem-vindo(a)! 👋 Este pre-work existe para você validar, **antes do curso começar**, que seu ambiente do GitHub Enterprise está pronto -- criar um repositório a partir de um template, abrir um Codespace e rodar uma aplicação .NET 10. Aguarde alguns segundos, um comentário com as instruções para abrir o Codespace será publicado nesta issue em seguida."
+
+  post_codespace_instructions:
+    name: Post Codespace instructions
+    needs: [start_exercise]
+    if: ${{ !github.event.repository.is_template }}
+    runs-on: ubuntu-latest
+    env:
+      ISSUE_REPOSITORY: ${{ github.repository }}
+      ISSUE_NUMBER: ${{ needs.start_exercise.outputs.issue-number }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Get response templates
+        uses: actions/checkout@v6
+        with:
+          repository: impacta-ghcp-eng-moderna/exercise-toolkit
+          path: exercise-toolkit
+          ref: main
+
+      - name: Post comment - Codespace instructions
+        uses: GrantBirki/comment@v2.1.1
+        with:
+          repository: ${{ env.ISSUE_REPOSITORY }}
+          issue-number: ${{ env.ISSUE_NUMBER }}
+          file: .github/steps/pre-work-instructions.md
+          vars: |
+            repository: ${{ github.repository }}
+
+      - name: Create comment - watching for progress
+        uses: GrantBirki/comment@v2.1.1
+        with:
+          repository: ${{ env.ISSUE_REPOSITORY }}
+          issue-number: ${{ env.ISSUE_NUMBER }}
+          file: exercise-toolkit/markdown-templates/step-feedback/watching-for-progress.md
+
+      - name: Enable next step workflow
+        run: |
+          gh workflow enable "Step 1 - Post cleanup instructions"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

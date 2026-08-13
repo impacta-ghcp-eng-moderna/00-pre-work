@@ -1,0 +1,22 @@
+{
+  "name": "Pre-work .NET 10",
+  "image": "mcr.microsoft.com/devcontainers/dotnet:1-10.0",
+  "postCreateCommand": "dotnet restore src/PreWork/PreWork.csproj",
+  "forwardPorts": [5075],
+  "portsAttributes": {
+    "5075": {
+      "label": "PreWork app",
+      "onAutoForward": "openPreview"
+    }
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-dotnettools.csharp",
+        "ms-dotnettools.csdevkit",
+        "GitHub.copilot",
+        "GitHub.copilot-chat"
+      ]
+    }
+  }
+}

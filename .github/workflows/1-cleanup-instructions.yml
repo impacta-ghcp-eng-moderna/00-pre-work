@@ -1,0 +1,40 @@
+name: Step 1 - Post cleanup instructions
+
+on:
+  issue_comment:
+    types: [created]
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  post_cleanup_instructions:
+    name: Post cleanup instructions
+    runs-on: ubuntu-latest
+    # Ignore comments from bots (avoids reacting to our own automated comments)
+    if: ${{ github.event.issue.pull_request == null && !endsWith(github.event.comment.user.login, '[bot]') }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Find existing cleanup comment
+        id: find-comment
+        uses: peter-evans/find-comment@v3
+        with:
+          issue-number: ${{ github.event.issue.number }}
+          comment-author: "github-actions[bot]"
+          body-includes: "<!-- cleanup-instructions -->"
+
+      - name: Post comment - cleanup instructions
+        if: ${{ steps.find-comment.outputs.comment-id == '' }}
+        uses: GrantBirki/comment@v2.1.1
+        with:
+          issue-number: ${{ github.event.issue.number }}
+          file: .github/steps/cleanup-instructions.md
+
+      - name: Close issue
+        if: ${{ steps.find-comment.outputs.comment-id == '' }}
+        run: gh issue close "${{ github.event.issue.number }}" --repo "${{ github.repository }}"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
