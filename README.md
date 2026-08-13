@@ -25,6 +25,13 @@ Antes de começar, confirme com o professor/organização:
 
 [![Iniciar Exercício](https://img.shields.io/badge/Iniciar%20Exercício-%E2%86%92-1f883d?style=for-the-badge&logo=github&labelColor=197935)](https://github.com/new?template_owner=impacta-ghcp-eng-moderna&template_name=00-pre-work&owner=%40me&name=impacta-ghcp-eng-moderna-00-pre-work&description=Pre-work%3A+preparando+o+ambiente+do+curso)
 
-> Depois de gerar sua cópia, o README deste novo repositório será atualizado
-> automaticamente com o link para a issue de boas-vindas.
+> [!WARNING]
+> **Depois de clicar no botão, você será levado para o SEU NOVO repositório -- mas ele
+> ainda vai parecer com este aqui (a mesma página que você está vendo agora)!** Isso é
+> esperado: um bot está preparando a issue de boas-vindas em segundo plano.
+>
+> 1. **Aguarde cerca de 20 segundos** sem fechar a aba.
+> 2. **Atualize a página (F5)**.
+> 3. O README vai mudar e mostrar um link para a issue -- é nela que estão as instruções
+>    para abrir o Codespace. Se ainda não mudou, aguarde mais um pouco e atualize de novo.
 

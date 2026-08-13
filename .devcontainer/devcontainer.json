@@ -1,6 +1,9 @@
 {
   "name": "Pre-work .NET 10",
   "image": "mcr.microsoft.com/devcontainers/dotnet:1-10.0",
+  "features": {
+    "ghcr.io/devcontainers/features/python:1": {}
+  },
   "postCreateCommand": "dotnet restore src/PreWork/PreWork.csproj",
   "forwardPorts": [5075],
   "portsAttributes": {
@@ -14,6 +17,7 @@
       "extensions": [
         "ms-dotnettools.csharp",
         "ms-dotnettools.csdevkit",
+        "ms-vsliveshare.vsliveshare",
         "GitHub.copilot",
         "GitHub.copilot-chat"
       ]
