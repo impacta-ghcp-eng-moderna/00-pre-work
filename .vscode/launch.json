@@ -2,19 +2,13 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": ".NET Core Launch (web)",
-      "type": "coreclr",
+      "name": "C#: PreWork Debug",
+      "type": "dotnet",
       "request": "launch",
-      "preLaunchTask": "build",
-      "program": "${workspaceFolder}/src/PreWork/bin/Debug/net10.0/PreWork.dll",
-      "cwd": "${workspaceFolder}/src/PreWork",
-      "stopAtEntry": false,
+      "projectPath": "${workspaceFolder}/src/PreWork/PreWork.csproj",
       "serverReadyAction": {
         "action": "openExternally",
         "pattern": "\\bNow listening on:\\s+(https?://\\S+)"
-      },
-      "env": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
       }
     }
   ]
